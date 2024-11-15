@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <title>Check List</title>
+</head>
+
+<body>
+    <header>
+        <h1 id="title" class="shadows-into-light-regular">Check List</h1>
+    </header>
+    <div class="container">
+        <div class="content">
+            <div class="login-content">
+                <div class="id-content input">
+                    <input type="text" id="username" class="grandiflora-one-regular" placeholder="아이디"
+                        autocomplete="off">
+                </div>
+                <div class="passward-content input">
+                    <input type="password" id="password" class="grandiflora-one-regular" placeholder="비밀번호"
+                        autocomplete="off">
+                </div>
+            </div>
+            <div class="error-messages">
+                <p id="error-mismatch" class="error grandiflora-one-regular" style="display: none;">아이디나 비밀번호가 일치하지
+                    않습니다.</p>
+                <p id="error-empty" class="error grandiflora-one-regular" style="display: none;">아이디와 비밀번호를 입력해 주세요.</p>
+            </div>
+            <div class="info">
+                <p id="login" class="grandiflora-one-regular" onclick="login()">로그인</p>
+                <p class="side">|</p>
+                <p id="join" class="grandiflora-one-regular" onclick="register()">회원가입</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function register() {
+            window.location.href = "/signup";
+        }
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const errorEmpty = document.getElementById("error-empty");
+            const errorMismatch = document.getElementById("error-mismatch");
+
+            errorEmpty.style.display = "none";
+            errorMismatch.style.display = "none";
+
+            if (!username || !password) {
+                errorEmpty.style.display = "block";
+                return;
+            }
+
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = "/main2";
+                    } else {
+                        errorMismatch.style.display = "block";
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("로그인 중 오류가 발생했습니다. 다시 시도해 주세요.");
+                });
+        }
+
+        document.getElementById("username").addEventListener("input", hideErrors);
+        document.getElementById("password").addEventListener("input", hideErrors);
+
+        function hideErrors() {
+            document.getElementById("error-empty").style.display = "none";
+            document.getElementById("error-mismatch").style.display = "none";
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/join.css') }}">
+    <title>Check List</title>
+</head>
+
+<body>
+    <header>
+        <h1 id="title" class="shadows-into-light-regular">Check List</h1>
+    </header>
+    <div class="container">
+        <div class="content">
+            <!-- method와 action 속성 제거 -->
+            <form id="signupForm" class="form">
+                <div class="join-content">
+                    <div class="id-content">
+                        <input type="text" id="username" name="username" class="grandiflora-one-regular"
+                            placeholder="아이디" autocomplete="off">
+                    </div>
+                    <div class="passward-content">
+                        <input type="password" id="password" name="password" class="grandiflora-one-regular"
+                            placeholder="비밀번호" autocomplete="off">
+                    </div>
+                    <div class="passward-check-content">
+                        <input type="password" id="passwordConfirm" name="passwordConfirm"
+                            class="grandiflora-one-regular" placeholder="비밀번호 확인" autocomplete="off">
+                    </div>
+                </div>
+                <div class="error-messages">
+                    <p id="error-empty" class="error grandiflora-one-regular" style="display: none;">아이디와 비밀번호를 입력해 주세요.
+                    </p>
+                    <p id="error-mismatch" class="error grandiflora-one-regular" style="display: none;">비밀번호가 일치하지 않습니다.
+                    </p>
+                </div>
+                <div class="info">
+                    <button type="submit" id="join" class="grandiflora-one-regular">회원가입</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // 폼 제출의 기본 동작을 중지
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const passwordConfirm = document.getElementById("passwordConfirm").value;
+
+            const errorEmpty = document.getElementById("error-empty");
+            const errorMismatch = document.getElementById("error-mismatch");
+
+            errorEmpty.style.display = "none";
+            errorMismatch.style.display = "none";
+
+            if (!username || !password) {
+                errorEmpty.style.display = "block";
+                return;
+            }
+            else if (password !== passwordConfirm) {
+                errorMismatch.style.display = "block";
+                return;
+            }
+
+            // JSON 데이터를 POST로 전송
+            fetch('/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("회원가입이 완료되었습니다.");
+                        window.location.href = "/login";
+                    }
+                    else alert(data.message);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("회원가입 중 오류가 발생했습니다. 다시 시도해 주세요.");
+                });
+        });
+
+        // Hide error messages on input change
+        document.getElementById("username").addEventListener("input", hideErrors);
+        document.getElementById("password").addEventListener("input", hideErrors);
+        document.getElementById("passwordConfirm").addEventListener("input", hideErrors);
+
+        function hideErrors() {
+            document.getElementById("error-empty").style.display = "none";
+            document.getElementById("error-mismatch").style.display = "none";
+        }
+    </script>
+</body>
+
+</html>

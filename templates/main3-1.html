@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main3-1.css') }}">
+    <title>Check List</title>
+</head>
+
+<body>
+    <header>
+        <i class="bi bi-arrow-left-square" onclick="window.location.href='/main2'"></i>
+        <div class="title-content">
+            <h1 id="title" class="shadows-into-light-regular">Check List</h1>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div id="love" class="content" onclick="selectCategory('love')">
+                <img src="{{ url_for('static', filename='img/love.png') }}" alt="커플">
+                <p class="tag grandiflora-one-regular">커플</p>
+            </div>
+            <div id="birthday" class="content" onclick="selectCategory('birthday')">
+                <img src="{{ url_for('static', filename='img/birthday.png') }}" alt="생일">
+                <p class="tag grandiflora-one-regular">생일</p>
+            </div>
+            <div id="test" class="content" onclick="selectCategory('test')">
+                <img src="{{ url_for('static', filename='img/test.png') }}" alt="시험">
+                <p class="tag grandiflora-one-regular">시험</p>
+            </div>
+            <div id="marriage" class="content" onclick="selectCategory('marriage')">
+                <img src="{{ url_for('static', filename='img/marriage.png') }}" alt="결혼기념일">
+                <p class="tag grandiflora-one-regular">결혼기념일</p>
+            </div>
+            <div id="task" class="content" onclick="selectCategory('task')">
+                <img src="{{ url_for('static', filename='img/task.png') }}" alt="과제">
+                <p class="tag grandiflora-one-regular">과제</p>
+            </div>
+            <div id="fan" class="content" onclick="selectCategory('fan')">
+                <img src="{{ url_for('static', filename='img/fan.png') }}" alt="입덕">
+                <p class="tag grandiflora-one-regular">입덕</p>
+            </div>
+        </div>
+    </main>
+    <script>
+        function selectCategory(category) {
+            window.location.href = `/main3-2?category=${category}`;
+        }
+    </script>
+</body>
+
+</html>

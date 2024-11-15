@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Grandiflora+One&display=swap');
+
+.grandiflora-one-regular {
+    font-family: "Grandiflora One", serif;
+    font-weight: bolder;
+    font-style: normal;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #a8b4d7c6;
+}
+
+header {
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    column-gap: 626px;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.title-content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-right: 40px;
+}
+
+.bi-arrow-left-square {
+    color: #000000;
+    font-size: 35px;
+    cursor: pointer;
+    position: fixed;
+    margin-left: 20px;
+}
+
+.shadows-into-light-regular {
+    font-family: "Shadows Into Light", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 45px;
+    color: #000000;
+}
+
+main {
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 75px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.content {
+    display: flex;
+    border: 2px solid #00000067;
+    border-radius: 15px;
+}
+
+.content:hover {
+    border: 2px solid #000000;
+    transition: 0.5s ease;
+}
+
+img {
+    width: 220px;
+    opacity: 0.6;
+}
+
+.content:hover img {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+#love,
+#birthday,
+#test,
+#marriage,
+#task,
+#fan {
+    position: relative;
+}
+
+.tag {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    font-family: 'Grandiflora One' serif;
+    font-size: 22px;
+    color: #000000;
+    margin: 0;
+}
+
+@media (max-width: 1024px) {
+    main {
+        margin: 0;
+    }
+
+    .content {
+        display: flex;
+        border: 2px solid #00000067;
+        border-radius: 15px;
+    }
+
+    img {
+        width: 220px;
+    }
+}
+
+@media (max-width: 900px) {
+    img {
+        width: 180px;
+    }
+
+    .tag {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 800px) {
+    main {
+        margin-top: 50px;
+    }
+
+    img {
+        width: 170px;
+    }
+}
+
+@media (max-width: 650px) {
+    header {
+        padding: 10px;
+    }
+
+    .title-content {
+        padding-right: 10px;
+    }
+
+    .shadows-into-light-regular {
+        font-size: 35px;
+    }
+
+    .bi-arrow-left-square {
+        font-size: 25px;
+        margin-left: 20px;
+    }
+
+    main {
+        margin-top: 15px;
+    }
+
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    img {
+        width: 160px;
+    }
+}
+
+@media (max-width: 450px) {
+    body {
+        align-items: center;
+    }
+    
+    .title-content {
+        padding: 0;
+    }
+
+    .shadows-into-light-regular {
+        font-size: 35px;
+    }
+
+    .bi-arrow-left-square {
+        font-size: 30px;
+        margin-left: 25px;
+    }
+
+    main {
+        margin: 0;
+    }
+
+    .container {
+        gap: 20px;
+    }
+
+    .content {
+        border-radius: 8px;
+    }
+
+    img {
+        width: 130px;
+    }
+
+    .tag {
+        font-size: 13px;
+    }
+}

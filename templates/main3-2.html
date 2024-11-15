@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/current/metro.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main3-2.css') }}">
+    <title>Check List</title>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <i class="bi bi-arrow-left-square" onclick="back('main2')"></i>
+            <div class="title-content">
+                <h1 id="title" class="shadows-into-light-regular">Check List</h1>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            {% if category == 'love' %}
+            <div id="love" class="super-content">
+                <div class="content">
+                    <div class="re-choice">
+                        <img src="{{ url_for('static', filename='img/love.png') }}" alt="">
+                        <p class="category grandiflora-one-regular">커플</p>
+                        <a href="{{ url_for('main3_1') }}">
+                            <i class="bi bi-caret-down-fill"></i>
+                        </a>
+                    </div>
+                    <p id="dDay-display" class="tag2 grandiflora-one-regular">D - DAY</p>
+                </div>
+                <div class="name-content">
+                    <div class="name">
+                        <input type="text" class="input-name grandiflora-one-regular" placeholder="누구와의 기념일 인가요?">
+                        <i class="bi bi-suit-heart"></i>
+                    </div>
+                </div>
+                <div class="define-content">
+                    <div class="define">
+                        <div class="calendar-picker">
+                            <input type="text" data-role="calendarpicker" data-locale="ko-KR"
+                                data-calendar-button-icon="<i class='bi bi-calendar-plus-fill'></i>"
+                                class="calendar-icon-only input-define grandiflora-one-regular" id="date-love"
+                                placeholder="처음 만난 날" onchange="updateDDay('love')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% elif category == "birthday" %}
+            <div id="birthday" class="super-content">
+                <div class="content">
+                    <div class="re-choice">
+                        <img src="{{ url_for('static', filename='img/birthday.png') }}" alt="">
+                        <p class="category grandiflora-one-regular">생일</p>
+                        <a href="{{ url_for('main3_1') }}">
+                            <i class="bi bi-caret-down-fill"></i>
+                        </a>
+                    </div>
+                    <p id="dDay-display" class="tag2 grandiflora-one-regular">D - DAY</p>
+                </div>
+                <div class="name-content">
+                    <div class="name">
+                        <input type="text" class="input-name grandiflora-one-regular" placeholder="누구의 생일인가요?">
+                        <i class="bi bi-cake-fill"></i>
+                    </div>
+                </div>
+                <div class="define-content">
+                    <div class="define">
+                        <div class="calendar-picker">
+                            <input type="text" data-role="calendarpicker" data-locale="ko-KR"
+                                data-calendar-button-icon="<i class='bi bi-calendar-plus-fill'></i>"
+                                class="calendar-icon-only input-define grandiflora-one-regular" id="date-birthday"
+                                placeholder="태어난 날" onchange="updateDDay('birthday')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% elif category == 'test' %}
+            <div id="test" class="super-content">
+                <div class="content">
+                    <div class="re-choice">
+                        <img src="{{ url_for('static', filename='img/test.png') }}" alt="">
+                        <p class="category grandiflora-one-regular">시험</p>
+                        <a href="{{ url_for('main3_1') }}">
+                            <i class="bi bi-caret-down-fill"></i>
+                        </a>
+                    </div>
+                    <p id="dDay-display" class="tag2 grandiflora-one-regular">D - DAY</p>
+                </div>
+                <div class="name-content">
+                    <div class="name">
+                        <input type="text" class="input-name grandiflora-one-regular" placeholder="어떤 시험인가요?">
+                        <i class="bi bi-pencil-square"></i>
+                    </div>
+                </div>
+                <div class="define-content">
+                    <div class="define">
+                        <div class="calendar-picker">
+                            <input type="text" data-role="calendarpicker" data-locale="ko-KR"
+                                data-calendar-button-icon="<i class='bi bi-calendar-plus-fill'></i>"
+                                class="calendar-icon-only input-define grandiflora-one-regular" id="date-test"
+                                placeholder="시험 날 까지" onchange="updateDDay('test')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% elif category == 'marriage' %}
+            <div id="marriage" class="super-content">
+                <div class="content">
+                    <div class="re-choice">
+                        <img src="{{ url_for('static', filename='img/marriage.png') }}" alt="">
+                        <p class="category grandiflora-one-regular">결혼기념일</p>
+                        <a href="{{ url_for('main3_1') }}">
+                            <i class="bi bi-caret-down-fill"></i>
+                        </a>
+                    </div>
+                    <p id="dDay-display" class="tag2 grandiflora-one-regular">D - DAY</p>
+                </div>
+                <div class="name-content">
+                    <div class="name">
+                        <input type="text" class="input-name grandiflora-one-regular" placeholder="디데이 제목을 입력하세요.">
+                        <i class="bi bi-suit-heart-fill"></i>
+                    </div>
+                </div>
+                <div class="define-content">
+                    <div class="define">
+                        <div class="calendar-picker">
+                            <input type="text" data-role="calendarpicker" data-locale="ko-KR"
+                                data-calendar-button-icon="<i class='bi bi-calendar-plus-fill'></i>"
+                                class="calendar-icon-only input-define grandiflora-one-regular" id="date-marriage"
+                                placeholder="함께한지" onchange="updateDDay('marriage')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% elif category == 'task' %}
+            <div id="task" class="super-content">
+                <div class="content">
+                    <div class="re-choice">
+                        <img src="{{ url_for('static', filename='img/task.png') }}" alt="">
+                        <p class="category grandiflora-one-regular">과제</p>
+                        <a href="{{ url_for('main3_1') }}">
+                            <i class="bi bi-caret-down-fill"></i>
+                        </a>
+                    </div>
+                    <p id="dDay-display" class="tag2 grandiflora-one-regular">D - DAY</p>
+                </div>
+                <div class="name-content">
+                    <div class="name">
+                        <input type="text" class="input-name grandiflora-one-regular" placeholder="어떤 과제인가요?">
+                        <i class="bi bi-journal"></i>
+                    </div>
+                </div>
+                <div class="define-content">
+                    <div class="define">
+                        <div class="calendar-picker">
+                            <input type="text" data-role="calendarpicker" data-locale="ko-KR"
+                                data-calendar-button-icon="<i class='bi bi-calendar-plus-fill'></i>"
+                                class="calendar-icon-only input-define grandiflora-one-regular" id="date-task"
+                                placeholder="마감일 까지" onchange="updateDDay('task')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% elif category == 'fan' %}
+            <div id="fan" class="super-content">
+                <div class="content">
+                    <div class="re-choice">
+                        <img src="{{ url_for('static', filename='img/fan.png') }}" alt="">
+                        <p class="category grandiflora-one-regular">입덕</p>
+                        <a href="{{ url_for('main3_1') }}">
+                            <i class="bi bi-caret-down-fill"></i>
+                        </a>
+                    </div>
+                    <p id="dDay-display" class="tag2 grandiflora-one-regular">D - DAY</p>
+                </div>
+                <div class="name-content">
+                    <div class="name">
+                        <input type="text" class="input-name grandiflora-one-regular" placeholder="디데이 제목을 입력하세요.">
+                        <div class="category-icon">
+                            <i class="bi bi-arrow-through-heart"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="define-content">
+                    <div class="define">
+                        <div class="calendar-picker">
+                            <input type="text" data-role="calendarpicker" data-locale="ko-KR"
+                                data-calendar-button-icon="<i class='bi bi-calendar-plus-fill'></i>"
+                                class="calendar-icon-only input-define grandiflora-one-regular" id="date-fan"
+                                placeholder="입덕한지" onchange="updateDDay('fan')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+    <footer>
+        <div class="check">
+            <i class="bi bi-check-square" onclick="check('main2')"></i>
+        </div>
+    </footer>
+    <script src="https://cdn.metroui.org.ua/current/metro.js"></script>
+    <script>
+        function back(nextId) {
+            if (confirm("디데이 등록을 취소하시겠습니까?")) window.location.href = nextId;
+        }
+
+        function calculateDDay(targetDate, category) {
+            const today = new Date();
+            let target = new Date(targetDate);
+
+            if (category === "birthday" || category === "marriage") {
+                let originalTarget = new Date(target);
+                target.setFullYear(today.getFullYear());
+
+                if (target < today) target.setFullYear(today.getFullYear() + 1);
+
+                const diffTime = target - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                let fullText = "";
+                if (target.getMonth() === today.getMonth() && target.getDate() === today.getDate()) fullText = `D - DAY`;
+                else fullText = `D - ${diffDays}`;
+
+                return {
+                    fullText,
+                    dateOnly: `${originalTarget.getFullYear()}년 ${originalTarget.getMonth() + 1}월 ${originalTarget.getDate()}일`
+                };
+            } else {
+                const diffTime = target - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                let fullText = "";
+                if (diffDays === 0) fullText = `D + 1`;
+                else if (diffDays > 0) fullText = `D - ${diffDays}`;
+                else fullText = `D + ${Math.abs(diffDays) + 1}`;
+
+                return {
+                    fullText,
+                    dateOnly: `${target.getFullYear()}년 ${target.getMonth() + 1}월 ${target.getDate()}일`
+                };
+            }
+        }
+
+        function updateDDay(category) {
+            const dateInput = document.getElementById(`date-${category}`).value;
+            const dDayDisplay = document.getElementById("dDay-display");
+
+            if (dateInput) {
+                const result = calculateDDay(dateInput, category);
+                dDayDisplay.innerText = result.fullText;
+            }
+        }
+
+        function check(nextId) {
+            const content = document.querySelector(".input-name").value.trim();
+            const category = "{{ category }}";
+            const date = document.querySelector(`#date-${category}`).value.trim();
+
+            if (!content || !date) {
+                alert("디데이 정보를 모두 입력해 주세요.");
+                return;
+            }
+
+            const data = { category: category, content: content, date: date };
+
+            fetch('/save_data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = nextId;
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+
+</body>
+
+</html>
